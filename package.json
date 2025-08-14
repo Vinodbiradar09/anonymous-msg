@@ -13,6 +13,7 @@
     "bcrypt": "^6.0.0",
     "mongoose": "^8.17.1",
     "next": "15.4.6",
+    "next-auth": "^4.24.11",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-email": "^4.2.8",
