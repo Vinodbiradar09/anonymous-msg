@@ -44,6 +44,15 @@ export async function GET(request : Request) {
             },
         ]).exec();
 
+        // { this is how the output we get the output
+        //     _id: 1,
+        //     messages: [
+        //     { content: "Hi", createdAt: "2025-08-13T10:00:00Z" },
+        //     { content: "Hello again", createdAt: "2025-08-13T09:00:00Z" }
+        //      ]
+        // }
+
+
         if(!user || user.length === 0){
             return Response.json(
                 {
