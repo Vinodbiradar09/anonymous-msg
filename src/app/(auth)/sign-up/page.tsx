@@ -71,7 +71,7 @@ export default function SignUpForm() {
       if (response.data.success === true) {
         toast.success(response.data.message);
       } else {
-        toast.error("Error while registering");
+       toast.error(response.data.message || "Error while registering");
       }
 
       router.replace(`verify/${username}`);
@@ -82,8 +82,8 @@ export default function SignUpForm() {
       const axiosError = error as AxiosError<ApiResponse>;
       const errorMessage = axiosError.response?.data.message;
       toast.error(errorMessage);
-
-      setIsSubmitting(false);
+    } finally{
+        setIsSubmitting(false);
     }
   };
 
@@ -106,12 +106,11 @@ export default function SignUpForm() {
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                  
                     <Input
                       placeholder="username"
                       {...field}
                       onChange={(e) => {
-                        field.onChange(e)
+                        field.onChange(e);
                         debounced(e.target.value);
                       }}
                     />
@@ -125,7 +124,6 @@ export default function SignUpForm() {
                           : "text-red-500"
                       }`}
                     >
-                  
                       {usernameMessage}
                     </p>
                   )}

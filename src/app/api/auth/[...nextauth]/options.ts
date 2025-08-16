@@ -16,10 +16,6 @@ export const authOptions : NextAuthOptions= {
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials : any) : Promise<any>{
-
-                if(!credentials?.email || !credentials?.password){
-                    throw new Error("Please enter both fields")
-                }
                 await dbConnect();
                 try {
                     const user = await UserModel.findOne({
