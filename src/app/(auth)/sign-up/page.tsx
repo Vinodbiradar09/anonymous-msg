@@ -100,16 +100,16 @@ export default function SignUpForm() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-4 py-8 relative overflow-hidden">
-      {/* Dark background decorations */}
+     
       <div className="absolute inset-0 bg-gradient-to-r from-gray-800/10 via-black to-gray-800/10"></div>
       <div className="absolute top-10 left-20 w-80 h-80 bg-gray-700/20 rounded-full blur-3xl"></div>
       <div className="absolute bottom-10 right-20 w-96 h-96 bg-gray-600/20 rounded-full blur-3xl"></div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-gray-800/5 to-black/5 rounded-full blur-3xl"></div>
       
       <div className="w-full max-w-lg relative z-10">
-        {/* Main Card */}
+       
         <div className="bg-black/80 backdrop-blur-2xl border border-gray-800/60 rounded-3xl p-10 shadow-2xl shadow-black/50">
-          {/* Header */}
+         
           <div className="text-center mb-10">
             <div className="mb-8">
               <div className="bg-gradient-to-br from-gray-700/30 to-black/50 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 border border-gray-700/40 shadow-lg shadow-black/30">
@@ -132,7 +132,7 @@ export default function SignUpForm() {
             </p>
           </div>
 
-          {/* Form */}
+       
           <Form {...form}>
             <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
@@ -255,7 +255,7 @@ export default function SignUpForm() {
                 )}
               />
 
-              {/* Submit Button */}
+            
               <Button 
                 type="submit" 
                 className="w-full bg-gradient-to-r from-gray-700 to-black hover:from-gray-600 hover:to-gray-900 text-white font-semibold py-4 rounded-xl shadow-lg shadow-black/25 transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none border border-gray-700/50"
@@ -276,14 +276,14 @@ export default function SignUpForm() {
             </form>
           </Form>
 
-          {/* Divider */}
+          
           <div className="my-8 flex items-center">
             <div className="flex-1 border-t border-gray-700/50"></div>
             <span className="px-4 text-gray-500 text-sm">or</span>
             <div className="flex-1 border-t border-gray-700/50"></div>
           </div>
 
-          {/* Sign In Link */}
+         
           <div className="text-center">
             <p className="text-gray-400">
               Already a member?{" "}
@@ -297,7 +297,7 @@ export default function SignUpForm() {
           </div>
         </div>
 
-        {/* Security Features */}
+      
         <div className="mt-8 grid grid-cols-3 gap-4 text-center">
           <div className="bg-black/60 backdrop-blur-sm border border-gray-800/40 rounded-xl p-4 shadow-lg shadow-black/20">
             <Shield className="w-6 h-6 text-gray-400 mx-auto mb-2" />
@@ -313,7 +313,7 @@ export default function SignUpForm() {
           </div>
         </div>
 
-        {/* Footer */}
+       
         <div className="mt-8 text-center text-gray-500 text-sm">
           <p>
             By signing up, you agree to our{" "}

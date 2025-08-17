@@ -91,14 +91,14 @@ export default function SendMessage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
-      {/* Dark background decorations */}
+     
       <div className="absolute inset-0 bg-gradient-to-r from-gray-800/5 via-black to-gray-800/5"></div>
       <div className="absolute top-20 left-10 w-96 h-96 bg-gray-700/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 right-10 w-80 h-80 bg-gray-600/15 rounded-full blur-3xl"></div>
       
       <div className="relative z-10 container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
-          {/* Header Section */}
+       
           <div className="text-center mb-12">
             <div className="bg-gradient-to-br from-gray-700/20 to-black/40 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 border border-gray-700/30 shadow-lg shadow-black/30">
               <MessageCircle className="w-10 h-10 text-gray-300" />
@@ -120,9 +120,9 @@ export default function SendMessage() {
             </div>
           </div>
 
-          {/* Main Content Card */}
+         
           <div className="bg-black/60 backdrop-blur-2xl border border-gray-800/50 rounded-3xl p-8 md:p-12 shadow-2xl shadow-black/30 mb-12">
-            {/* Message Form */}
+        
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
@@ -179,7 +179,7 @@ export default function SendMessage() {
             </Form>
           </div>
 
-          {/* AI Suggestions Section */}
+         
           <div className="bg-black/60 backdrop-blur-2xl border border-gray-800/50 rounded-3xl p-8 md:p-12 shadow-2xl shadow-black/30">
             <div className="text-center mb-8">
               <div className="bg-gradient-to-br from-gray-700/20 to-black/40 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-700/30 shadow-lg shadow-black/30">
@@ -220,7 +220,7 @@ export default function SendMessage() {
               </p>
             </div>
 
-            {/* Suggestions Card */}
+           
             <Card className="bg-gray-800/40 border-gray-700/40 shadow-lg shadow-black/20">
               <CardHeader className="pb-4">
                 <h3 className="text-xl font-semibold text-gray-200 flex items-center">
@@ -271,7 +271,7 @@ export default function SendMessage() {
 
           <Separator className="bg-gray-800/50 my-12" />
 
-          {/* CTA Section */}
+        
           <div className="text-center">
             <div className="bg-black/60 backdrop-blur-2xl border border-gray-800/50 rounded-3xl p-8 md:p-12 shadow-2xl shadow-black/30">
               <h2 className="text-2xl md:text-3xl font-bold mb-4">

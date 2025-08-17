@@ -77,7 +77,7 @@ export default function MessageCard({
             </div>
           </div>
 
-          {/* Delete Button */}
+        
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button
@@ -89,7 +89,7 @@ export default function MessageCard({
               </Button>
             </AlertDialogTrigger>
 
-            {/* Alert Dialog with Black Theme */}
+          
             <AlertDialogContent className="bg-black/90 backdrop-blur-xl border-gray-800/60 shadow-2xl shadow-black/50">
               <AlertDialogHeader>
                 <div className="flex items-center gap-3 mb-2">
@@ -105,7 +105,7 @@ export default function MessageCard({
                   this anonymous message from your account.
                 </AlertDialogDescription>
 
-                {/* Message Preview */}
+              
                 <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg p-3 mt-4">
                   <p className="text-gray-300 text-sm italic">
                     &ldquo;{message.content}&rdquo;
@@ -130,7 +130,7 @@ export default function MessageCard({
         </div>
       </CardHeader>
 
-      {/* Optional: Message metadata */}
+    
       <CardContent className="pt-0">
         <div className="flex items-center justify-between text-xs text-gray-600">
           <div className="flex items-center gap-2">
