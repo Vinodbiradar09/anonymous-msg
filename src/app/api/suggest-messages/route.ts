@@ -1,3 +1,4 @@
+
 export const runtime = 'edge';
 
 export async function POST() {
@@ -23,7 +24,7 @@ export async function POST() {
         max_tokens: 500,
         temperature: 0.9,
         top_p: 0.9,
-        stream: true,
+        stream: false, 
       })
     });
 
@@ -33,15 +34,12 @@ export async function POST() {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    return new Response(response.body, {
-      headers: {
-        'Content-Type': 'text/plain; charset=utf-8',
-        'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
-      },
-    });
+    const data = await response.json();
+    const suggestions = data.choices[0]?.message?.content || '';
 
-  } catch (error : any) {
+    return Response.json({ suggestions });
+
+  } catch (error: any) {
     console.error('Error generating suggestions:', error);
     return Response.json(
       { error: 'Failed to generate suggestions', details: error.message },

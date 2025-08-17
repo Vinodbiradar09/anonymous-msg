@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,21 +33,27 @@ export default function MessageCard({
   message,
   onMessageDelete,
 }: MessageCardProps) {
+    if(!message._id){
+      console.log("messageId" , message._id);
+    }
   const handleDeleteConfirm = async () => {
     try {
       const response = await axios.delete<ApiResponse>(
         `/api/delete-message/${message._id}`
       );
-      if (response.data.success === true) {
-        toast.success(response.data.message);
-      } else {
-        toast.error(response.data.message);
-      }
 
-      onMessageDelete(message._id);
+      if (response.data.success) {
+        toast.success(response.data.message || "Message deleted successfully");
+        onMessageDelete(message._id); 
+      } else {
+        toast.error(response.data.message || "Failed to delete message");
+      }
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
-      toast.error(axiosError.response?.data.message);
+      console.error('Delete error:', error);
+      toast.error(
+        axiosError.response?.data.message || "Failed to delete message"
+      );
     }
   };
 
@@ -59,8 +64,8 @@ export default function MessageCard({
           <CardTitle>{message.content}</CardTitle>
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant='destructive'>
-                <X className="w-5 h-5" />
+              <Button variant="destructive" size="sm">
+                <X className="w-4 h-4" />
               </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
@@ -73,13 +78,15 @@ export default function MessageCard({
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={handleDeleteConfirm}>Continue</AlertDialogAction>
+                <AlertDialogAction onClick={handleDeleteConfirm}>
+                  Delete
+                </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
         </div>
-        <div className="text-sm">
-            {dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}
+        <div className="text-sm text-gray-500">
+          {dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}
         </div>
       </CardHeader>
       <CardContent></CardContent>

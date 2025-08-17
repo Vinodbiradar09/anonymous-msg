@@ -6,7 +6,7 @@ import { authOptions } from "../../auth/[...nextauth]/options";
 import { NextRequest } from "next/server";
 
 
-export async function POST(
+export async function DELETE(
   request: NextRequest,
   { params }: { params: { messageid: string } }
 ) {
@@ -59,7 +59,7 @@ export async function POST(
 
     return Response.json(
         {
-            success : true.valueOf,
+            success : true,
             message : "Successfully message deleted",
         } , {status : 200}
     )

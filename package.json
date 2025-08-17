@@ -18,7 +18,7 @@
     "@radix-ui/react-switch": "^1.2.6",
     "@react-email/components": "^0.5.0",
     "@react-email/render": "^1.2.0",
-    "ai": "^5.0.14",
+    "ai": "^5.0.15",
     "autoprefixer": "^10.4.21",
     "axios": "^1.11.0",
     "bcrypt": "^6.0.0",
