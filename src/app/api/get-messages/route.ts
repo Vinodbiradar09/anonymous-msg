@@ -54,6 +54,7 @@ export async function GET(request : Request) {
 
 
         if(!user || user.length === 0){
+            console.log("users" , user);
             return Response.json(
                 {
                     success : false,

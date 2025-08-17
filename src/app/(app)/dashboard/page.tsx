@@ -55,7 +55,7 @@ import MessageCard from "@/components/MessageCard";
         };
       } catch (error) {
         const axiosError = error as AxiosError<ApiResponse>;
-        toast.error(axiosError.response?.data.message);
+        toast.error(axiosError.response?.data.message || "No new messages available");
       } finally{
         setIsLoading(false);
         setIsSwitchLoading(false);
@@ -140,7 +140,7 @@ import MessageCard from "@/components/MessageCard";
               ))
           ) : ( 
               <p>No messages to display.</p>
-          )};
+          )}
       </div>
     </div>
   )
