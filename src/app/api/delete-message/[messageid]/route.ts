@@ -7,9 +7,9 @@ import { NextRequest } from "next/server";
 
 export async function DELETE(
   request: NextRequest,
-  context: { params: { messageid: string } }
+  context: { params: Record<string, string> }  
 ) {
-  const { messageid } = context.params;
+  const messageid = context.params.messageid;
   await dbConnect();
 
   if (!messageid) {
@@ -20,7 +20,7 @@ export async function DELETE(
   }
 
   const session = await getServerSession(authOptions);
-  const user = session?.user as User & { _id?: string }; 
+  const user = session?.user as User & { _id?: string };
 
   if (!session || !user || !user._id) {
     return Response.json(
@@ -32,9 +32,7 @@ export async function DELETE(
   try {
     const updateResult = await UserModel.findByIdAndUpdate(
       user._id,
-      {
-        $pull: { messages: { _id: messageid } },
-      },
+      { $pull: { messages: { _id: messageid } } },
       { new: true, runValidators: true }
     );
 
@@ -54,7 +52,8 @@ export async function DELETE(
     return Response.json(
       {
         success: false,
-        message: "Error while deleting message, failed to delete the message",
+        message:
+          "Error while deleting message, failed to delete the message",
       },
       { status: 500 }
     );
