@@ -156,12 +156,12 @@ export default function SignInForm() {
 
             
               <div className="text-right">
-                <Link 
-                  href="/forgot-password" 
+                <span
+                  
                   className="text-gray-400 hover:text-gray-300 text-sm transition-colors"
                 >
                   Forgot password?
-                </Link>
+                </span>
               </div>
 
              
@@ -226,13 +226,13 @@ export default function SignInForm() {
         <div className="mt-8 text-center text-gray-500 text-sm">
           <p>
             By signing in, you agree to our{" "}
-            <Link href="/terms" className="text-gray-400 hover:text-gray-300 transition-colors">
+            <span className="text-gray-400 hover:text-gray-300 transition-colors">
               Terms of Service
-            </Link>{" "}
+            </span>{" "}
             and{" "}
-            <Link href="/privacy" className="text-gray-400 hover:text-gray-300 transition-colors">
+            <span className="text-gray-400 hover:text-gray-300 transition-colors">
               Privacy Policy
-            </Link>
+            </span>
           </p>
         </div>
       </div>

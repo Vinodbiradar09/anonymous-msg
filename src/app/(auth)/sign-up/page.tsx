@@ -317,13 +317,13 @@ export default function SignUpForm() {
         <div className="mt-8 text-center text-gray-500 text-sm">
           <p>
             By signing up, you agree to our{" "}
-            <Link href="/terms" className="text-gray-400 hover:text-gray-300 transition-colors">
+            <span className="text-gray-400 hover:text-gray-300 transition-colors">
               Terms of Service
-            </Link>{" "}
+            </span>{" "}
             and{" "}
-            <Link href="/privacy" className="text-gray-400 hover:text-gray-300 transition-colors">
+            <span className="text-gray-400 hover:text-gray-300 transition-colors">
               Privacy Policy
-            </Link>
+            </span>
           </p>
         </div>
       </div>
