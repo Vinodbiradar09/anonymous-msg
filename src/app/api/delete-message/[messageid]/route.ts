@@ -5,11 +5,11 @@ import { User } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { messageid: string } }
-) {
-  const messageid = params.messageid;
+export async function DELETE(request: NextRequest) {
+  // Extract messageid from URL path, assuming URL path ends with /delete-message/[messageid]
+  const urlParts = request.nextUrl.pathname.split('/');
+  const messageid = urlParts[urlParts.length - 1];
+
   await dbConnect();
 
   if (!messageid) {
