@@ -1,90 +1,49 @@
+import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
-import { User } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/options";
 import mongoose from "mongoose";
+import { User } from "next-auth";
 
-export async function GET(request : Request) {
-    await dbConnect();
-    const session = await getServerSession(authOptions);
-    const _user:User = session?.user;
+export async function GET(request: Request) {
+  await dbConnect();
 
-    if(!session || !_user){
-        return Response.json(
-            {
-                success : false ,
-                message : "Not authenticated",
-            },
-            {
-                status : 401,
-            }
-        )
+  const session = await getServerSession(authOptions);
+  const user: User = session?.user;
+
+  if (!session || !user) {
+    return NextResponse.json(
+      { success: false, message: "Not authenticated" },
+      { status: 401 }
+    );
+  }
+
+  try {
+    const userId = new mongoose.Types.ObjectId(user._id);
+    const userWithMessages = await UserModel.aggregate([
+      { $match: { _id: userId } },
+      { $unwind: "$messages" },
+      { $sort: { "messages.createdAt": -1 } },
+      { $group: { _id: "$_id", messages: { $push: "$messages" } } },
+    ]).exec();
+
+    if (!userWithMessages || userWithMessages.length === 0) {
+      return NextResponse.json(
+        { success: false, message: "User not found" },
+        { status: 404 }
+      );
     }
 
-    const userId = new mongoose.Types.ObjectId(_user._id);
-    try {
-        const user = await UserModel.aggregate([
-            {
-                $match : {
-                    _id : userId,
-                }
-            },
-            {
-                $unwind : "$messages",
-            },
-            { $sort: { 'messages.createdAt': -1 } },
-            {
-                $group : {
-                    _id : "$_id",
-                    messages : {
-                        $push : "$messages",
-                    }
-                }
-            },
-        ]).exec();
-
-        // { this is how the output we get the output
-        //     _id: 1,
-        //     messages: [
-        //     { content: "Hi", createdAt: "2025-08-13T10:00:00Z" },
-        //     { content: "Hello again", createdAt: "2025-08-13T09:00:00Z" }
-        //      ]
-        // }
-
-
-        if(!user || user.length === 0){
-            console.log("users" , user);
-            return Response.json(
-                {
-                    success : false,
-                    message : "User not found",
-                },
-                {
-                    status : 404
-                }
-            )
-        }
-
-        return Response.json(
-            {
-                messages : user[0].messages,
-            },
-            {
-                status : 200
-            }
-        );
-
-    } catch (error) {
-        console.error("An unexcepted error occured" , error);
-        return Response.json(
-            {
-                success : false,
-                message : "Internal server error",
-            },
-            {
-                status : 500
-            }
-        );
-    }
+    return NextResponse.json(
+      { messages: userWithMessages[0].messages },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Unexpected error occurred", error);
+    return NextResponse.json(
+      { success: false, message: "Internal server error" },
+      { status: 500 }
+    );
+  }
 }
