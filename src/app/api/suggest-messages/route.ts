@@ -1,10 +1,12 @@
+import { NextResponse } from 'next/server';
+
 export const runtime = 'edge';
 
 export async function POST() {
   try {
     const timestamp = Date.now();
     const randomSeed = Math.floor(Math.random() * 10000);
-    
+
     const response = await fetch('https://api.perplexity.ai/chat/completions', {
       method: 'POST',
       headers: {
@@ -12,7 +14,7 @@ export async function POST() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'sonar-pro', 
+        model: 'sonar-pro',
         messages: [
           {
             role: 'system',
@@ -39,8 +41,8 @@ Randomization context: ${timestamp}-${randomSeed}. Use this to ensure complete u
           }
         ],
         max_tokens: 500,
-        temperature: 1.2, 
-        top_p: 0.95, 
+        temperature: 1.2,
+        top_p: 0.95,
         stream: false,
       })
     });
@@ -53,15 +55,12 @@ Randomization context: ${timestamp}-${randomSeed}. Use this to ensure complete u
 
     const data = await response.json();
     let suggestions = data.choices[0]?.message?.content || '';
-    
-   
+
     suggestions = suggestions.replace(/^["']|["']$/g, '').trim();
-    
-   
-    const questionArray = suggestions.split('||').filter(q => q.trim().length > 0);
-    
+
+    const questionArray = suggestions.split('||').filter((q: string) => q.trim().length > 0);
+
     if (questionArray.length !== 3) {
-    
       const fallbackQuestions = [
         "If you could design a holiday that the whole world would celebrate, what would it commemorate?",
         "What's the weirdest compliment you could give someone that would actually make them happy?",
@@ -70,21 +69,20 @@ Randomization context: ${timestamp}-${randomSeed}. Use this to ensure complete u
       suggestions = fallbackQuestions.join('||');
     }
 
-    return Response.json({ suggestions });
+    return NextResponse.json({ suggestions });
 
   } catch (error: any) {
     console.error('Error generating suggestions:', error);
-    
-   
+
     const uniqueFallbackQuestions = [
       "If you had to choose a theme song that played every time you entered a room, what would it be?",
       "What's something everyone does but no one talks about?",
       "If you could make one thing from the internet disappear forever, what would you choose?"
     ];
-    
-    return Response.json({ 
+
+    return NextResponse.json({
       suggestions: uniqueFallbackQuestions.join('||'),
-      fallback: true 
+      fallback: true
     });
   }
 }
