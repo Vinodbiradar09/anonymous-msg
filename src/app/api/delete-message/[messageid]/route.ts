@@ -3,17 +3,17 @@ import { getServerSession } from "next-auth/next";
 import dbConnect from "@/lib/dbConnect";
 import { User } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
   request: NextRequest,
-  context: { params: Record<string, string> }  
+  { params }: { params: { messageid: string } }
 ) {
-  const messageid = context.params.messageid;
+  const messageid = params.messageid;
   await dbConnect();
 
   if (!messageid) {
-    return Response.json(
+    return NextResponse.json(
       { success: false, message: "messageid is required" },
       { status: 400 }
     );
@@ -23,7 +23,7 @@ export async function DELETE(
   const user = session?.user as User & { _id?: string };
 
   if (!session || !user || !user._id) {
-    return Response.json(
+    return NextResponse.json(
       { success: false, message: "Not Authenticated" },
       { status: 401 }
     );
@@ -37,23 +37,22 @@ export async function DELETE(
     );
 
     if (!updateResult) {
-      return Response.json(
+      return NextResponse.json(
         { success: false, message: "Message not found or already deleted" },
         { status: 404 }
       );
     }
 
-    return Response.json(
+    return NextResponse.json(
       { success: true, message: "Successfully deleted message" },
       { status: 200 }
     );
   } catch (error) {
     console.error("Error while deleting the message", error);
-    return Response.json(
+    return NextResponse.json(
       {
         success: false,
-        message:
-          "Error while deleting message, failed to delete the message",
+        message: "Error while deleting message, failed to delete the message",
       },
       { status: 500 }
     );
