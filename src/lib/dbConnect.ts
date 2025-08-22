@@ -24,4 +24,4 @@ const dbConnect = async (): Promise<void> => {
   }
 };
 
-export default dbConnect;
+export default dbConnect ;
