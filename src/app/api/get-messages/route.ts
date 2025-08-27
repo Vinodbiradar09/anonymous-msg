@@ -30,7 +30,7 @@ export async function GET(request: Request) {
 
     if (!userWithMessages || userWithMessages.length === 0) {
       return NextResponse.json(
-        { success: false, message: "User not found" },
+        { success: false, message: "You Have Zero Messages" },
         { status: 404 }
       );
     }
